@@ -15,5 +15,10 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "react"],
-  "rules": {}
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/display-name": "off"
+  }
 }
