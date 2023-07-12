@@ -1,7 +1,7 @@
 import { Button } from '../../atoms/button';
 import '../buttons/style.css';
 
-type ButtonItems = {
+export type ButtonItems = {
   text: string;
   id: string;
 };
