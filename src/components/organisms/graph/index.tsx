@@ -2,7 +2,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useRef } from 'react';
 
-type HighchartsDataType = {
+export type HighchartsDataType = {
   type: string;
   data: number[];
   name: string;

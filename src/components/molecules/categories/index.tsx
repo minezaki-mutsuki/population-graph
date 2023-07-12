@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../categories/style.css';
 
-type PopulationType = 'all' | 'young' | 'adult' | 'old';
+export type PopulationType = 'all' | 'young' | 'adult' | 'old';
 
 type CategoriesProps = {
   onChange: (popilationType: PopulationType) => void;
