@@ -1,7 +1,7 @@
-import { Example } from "./components/atoms/example";
+import { PopulationGraph } from './components/pages/populationGraph';
 
 function App() {
-  return <Example onClick={() => alert("onClick")} />;
+  return <PopulationGraph />;
 }
 
 export default App;
