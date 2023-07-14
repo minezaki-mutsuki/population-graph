@@ -2,7 +2,6 @@ const API_URL = 'https://opendata.resas-portal.go.jp/api/v1/';
 import fetch from 'node-fetch';
 import React from 'react';
 import { ButtonItems } from '../../../molecules/buttons';
-import { HighchartsDataType } from '../../../organisms/graph';
 import { PopulationDataAllType, PopulationDataType } from '..';
 
 const API_KEY = process.env.REACT_APP_API_KEY ?? '';

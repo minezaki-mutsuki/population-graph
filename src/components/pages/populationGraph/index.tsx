@@ -5,6 +5,7 @@ import { PopulationGraphLayout } from '../../templates/populationGraphLayout';
 import { ButtonItems } from '../../molecules/buttons';
 import { getPrefecture, onAddPrefecture } from './models/resas';
 import { HighchartsDataType } from '../../organisms/graph';
+import { onDeletePrefecture } from './models/onDeletePrefecture';
 
 export type PopulationDataType = {
   all: HighchartsDataType;
@@ -42,7 +43,11 @@ export const PopulationGraph = () => {
       items={prefecture}
       onClick={(isChecked: boolean, id: string) => {
         isChecked
-          ? console.log(id)
+          ? onDeletePrefecture(
+              Number(id),
+              populationDataAll,
+              setPopulationDataAll
+            )
           : onAddPrefecture(
               Number(id),
               populationDataAll,
