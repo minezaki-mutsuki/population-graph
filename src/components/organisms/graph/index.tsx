@@ -36,10 +36,12 @@ export const Graph = ({ populationData }: GraphProps) => {
     },
   };
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={options}
-      ref={chartComponentRef}
-    />
+    <div style={{ width: '100%' }}>
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
+        ref={chartComponentRef}
+      />
+    </div>
   );
 };
