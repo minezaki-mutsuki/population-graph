@@ -3,23 +3,52 @@ import { PopulationType } from '../../molecules/categories';
 import { PopulationGraphLayout } from '../../templates/populationGraphLayout';
 
 import { ButtonItems } from '../../molecules/buttons';
-import { getPrefecture } from './models/resas';
+import { getPrefecture, onAddPrefecture } from './models/resas';
+import { HighchartsDataType } from '../../organisms/graph';
+
+export type PopulationDataType = {
+  all: HighchartsDataType;
+  young: HighchartsDataType;
+  adult: HighchartsDataType;
+  old: HighchartsDataType;
+};
+export type PopulationDataAllType = {
+  id: number;
+  data: PopulationDataType;
+};
 
 export const PopulationGraph = () => {
-  const [pre, setPre] = useState<ButtonItems[]>();
+  const [populationType, setPopulationType] = useState<PopulationType>('all');
+  const [prefecture, setPrefecture] = useState<ButtonItems[]>();
+  const [populationDataAll, setPopulationDataAll] = useState<
+    PopulationDataAllType[]
+  >([]);
+  const [populationData, setPopulationData] = useState<HighchartsDataType[]>(
+    []
+  );
   useEffect(() => {
-    getPrefecture(setPre);
+    getPrefecture(setPrefecture);
   }, []);
+  useEffect(() => {
+    console.log(populationDataAll);
+  }, [populationDataAll]);
 
-  return pre ? (
+  return prefecture && populationData ? (
     <PopulationGraphLayout
-      onChange={function (popilationType: PopulationType): void {
-        throw new Error('Function not implemented.');
-      }}
-      populationData={[]}
-      items={pre}
-      onClick={function (isChecked: boolean, id: string): void {
-        throw new Error('Function not implemented.');
+      onChange={(popilationType: PopulationType) =>
+        setPopulationType(popilationType)
+      }
+      populationData={populationData}
+      items={prefecture}
+      onClick={(isChecked: boolean, id: string) => {
+        isChecked
+          ? console.log(id)
+          : onAddPrefecture(
+              Number(id),
+              populationDataAll,
+              setPopulationDataAll,
+              prefecture
+            );
       }}
     />
   ) : (
