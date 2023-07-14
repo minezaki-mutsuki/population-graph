@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { PopulationType } from '../../molecules/categories';
 import { PopulationGraphLayout } from '../../templates/populationGraphLayout';
-
 import { ButtonItems } from '../../molecules/buttons';
 import { getPrefecture, onAddPrefecture } from './models/resas';
 import { HighchartsDataType } from '../../organisms/graph';
 import { onDeletePrefecture } from './models/onDeletePrefecture';
+import { onCreatePopulationData } from './models/onCreatePopulationData';
 
 export type PopulationDataType = {
   all: HighchartsDataType;
@@ -19,7 +19,7 @@ export type PopulationDataAllType = {
 };
 
 export const PopulationGraph = () => {
-  const [populationType, setPopulationType] = useState<PopulationType>('all');
+  const [populationType, setPopulationType] = useState<PopulationType>();
   const [prefecture, setPrefecture] = useState<ButtonItems[]>();
   const [populationDataAll, setPopulationDataAll] = useState<
     PopulationDataAllType[]
@@ -28,17 +28,25 @@ export const PopulationGraph = () => {
     []
   );
   useEffect(() => {
+    setPopulationType('all');
     getPrefecture(setPrefecture);
   }, []);
+
   useEffect(() => {
-    console.log(populationDataAll);
-  }, [populationDataAll]);
+    if (populationType === undefined) return;
+    onCreatePopulationData(
+      populationType,
+      populationDataAll,
+      setPopulationData
+    );
+  }, [populationDataAll, populationType]);
 
   return prefecture && populationData ? (
     <PopulationGraphLayout
-      onChange={(popilationType: PopulationType) =>
-        setPopulationType(popilationType)
-      }
+      onChange={(popilationType: PopulationType) => {
+        setPopulationType(popilationType);
+        setPopulationData([]);
+      }}
       populationData={populationData}
       items={prefecture}
       onClick={(isChecked: boolean, id: string) => {
@@ -57,6 +65,6 @@ export const PopulationGraph = () => {
       }}
     />
   ) : (
-    <></>
+    <div>Loading...</div>
   );
 };
