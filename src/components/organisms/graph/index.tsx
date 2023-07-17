@@ -24,7 +24,7 @@ export const Graph = ({ populationData }: GraphProps) => {
     },
     series: populationData,
     xAxis: {
-      categories: Array.from(Array(14).keys(), (x) => 1980 + x * 5),
+      categories: Array.from(Array(18).keys(), (x) => 1960 + x * 5),
       title: {
         text: '年度',
       },
@@ -36,10 +36,12 @@ export const Graph = ({ populationData }: GraphProps) => {
     },
   };
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={options}
-      ref={chartComponentRef}
-    />
+    <div style={{ width: '100%' }}>
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
+        ref={chartComponentRef}
+      />
+    </div>
   );
 };
