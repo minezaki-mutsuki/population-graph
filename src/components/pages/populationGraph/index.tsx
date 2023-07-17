@@ -6,6 +6,7 @@ import { getPrefecture, onAddPrefecture } from './models/resas';
 import { HighchartsDataType } from '../../organisms/graph';
 import { onDeletePrefecture } from './models/onDeletePrefecture';
 import { onCreatePopulationData } from './models/onCreatePopulationData';
+import { Loading } from '../loading';
 
 export type PopulationDataType = {
   all: HighchartsDataType;
@@ -65,6 +66,6 @@ export const PopulationGraph = () => {
       }}
     />
   ) : (
-    <div>Loading...</div>
+    <Loading />
   );
 };
