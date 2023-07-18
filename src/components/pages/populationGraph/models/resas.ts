@@ -4,7 +4,7 @@ import React from 'react';
 import { ButtonItems } from '../../../molecules/buttons';
 import { PopulationDataAllType, PopulationDataType } from '..';
 
-const API_KEY = process.env.REACT_APP_API_KEY ?? '';
+const API_KEY = process.env.API_KEY ?? '';
 
 type ResultItems = {
   prefCode: number;
