@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { PopulationType } from '../../molecules/categories';
 import { PopulationGraphLayout } from '../../templates/populationGraphLayout';
-import { ButtonItems } from '../../molecules/buttons';
-import { getPrefecture, onAddPrefecture } from './models/resas';
+import { ButtonItem } from '../../molecules/buttons';
+import { getPrefectures, onAddPrefecture } from './models/resas';
 import { HighchartsDataType } from '../../organisms/graph';
 import { onDeletePrefecture } from './models/onDeletePrefecture';
 import { onCreatePopulationData } from './models/onCreatePopulationData';
@@ -22,7 +22,7 @@ export type PopulationDataAllType = {
 
 export const PopulationGraph = () => {
   const [populationType, setPopulationType] = useState<PopulationType>();
-  const [prefecture, setPrefecture] = useState<ButtonItems[]>();
+  const [prefectures, setPrefectures] = useState<ButtonItem[]>();
   const [populationDataAll, setPopulationDataAll] = useState<
     PopulationDataAllType[]
   >([]);
@@ -31,7 +31,7 @@ export const PopulationGraph = () => {
   );
   useEffect(() => {
     setPopulationType('all');
-    getPrefecture(setPrefecture);
+    getPrefectures(setPrefectures);
   }, []);
 
   useEffect(() => {
@@ -45,15 +45,15 @@ export const PopulationGraph = () => {
 
   return (
     <div className="wrapper">
-      {prefecture && populationData ? (
+      {prefectures && populationData ? (
         <PopulationGraphLayout
-          onChange={(popilationType: PopulationType) => {
+          onPopulationTypeChange={(popilationType: PopulationType) => {
             setPopulationType(popilationType);
             setPopulationData([]);
           }}
           populationData={populationData}
-          items={prefecture}
-          onClick={(isChecked: boolean, id: string) => {
+          items={prefectures}
+          onPopulationButtonClick={(isChecked: boolean, id: string) => {
             isChecked
               ? onDeletePrefecture(
                   Number(id),
@@ -64,7 +64,7 @@ export const PopulationGraph = () => {
                   Number(id),
                   populationDataAll,
                   setPopulationDataAll,
-                  prefecture
+                  prefectures
                 );
           }}
         />

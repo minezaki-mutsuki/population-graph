@@ -1,13 +1,13 @@
 import { Button } from '../../atoms/button';
 import '../buttons/style.css';
 
-export type ButtonItems = {
+export type ButtonItem = {
   text: string;
   id: string;
 };
 
 type ButtonsProps = {
-  items: ButtonItems[];
+  items: ButtonItem[];
   onClick: (isChecked: boolean, id: string) => void;
 };
 

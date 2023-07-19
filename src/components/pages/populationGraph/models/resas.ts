@@ -1,18 +1,18 @@
 const API_URL = 'https://opendata.resas-portal.go.jp/api/v1/';
 import fetch from 'node-fetch';
 import React from 'react';
-import { ButtonItems } from '../../../molecules/buttons';
+import { ButtonItem } from '../../../molecules/buttons';
 import { PopulationDataAllType, PopulationDataType } from '..';
 
 const API_KEY = process.env.REACT_APP_API_KEY ?? '';
 
-type ResultItems = {
+type ResultItem = {
   prefCode: number;
   prefName: string;
 };
 
-export const getPrefecture = async (
-  setPrefecture: React.Dispatch<React.SetStateAction<ButtonItems[] | undefined>>
+export const getPrefectures = async (
+  setPrefectures: React.Dispatch<React.SetStateAction<ButtonItem[] | undefined>>
 ) => {
   try {
     const res = await fetch(`${API_URL}prefectures`, {
@@ -22,17 +22,17 @@ export const getPrefecture = async (
       },
     });
     const result = await res.json();
-    const resultItems: ResultItems[] = result.result;
-    const buttonItems: ButtonItems[] = [];
+    const resultItems: ResultItem[] = result.result;
+    const buttonItems: ButtonItem[] = [];
 
     resultItems.forEach((item) => {
-      const buttonItem: ButtonItems = {
+      const buttonItem: ButtonItem = {
         id: item.prefCode.toString(),
         text: item.prefName,
       };
       buttonItems.push(buttonItem);
     });
-    setPrefecture(buttonItems);
+    setPrefectures(buttonItems);
   } catch (error) {
     console.log(error);
   }
@@ -44,7 +44,7 @@ export const onAddPrefecture = async (
   setPopulationDataAll: React.Dispatch<
     React.SetStateAction<PopulationDataAllType[]>
   >,
-  prefecture: ButtonItems[]
+  prefectures: ButtonItem[]
 ) => {
   try {
     const res = await fetch(
@@ -76,7 +76,7 @@ export const onAddPrefecture = async (
       oldData.push(item.value);
     });
 
-    const name: string | undefined = prefecture.find(
+    const name: string | undefined = prefectures.find(
       (item) => item.id === id.toString()
     )?.text;
 

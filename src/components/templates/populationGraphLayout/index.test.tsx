@@ -20,10 +20,10 @@ test('コンポーネントが正しく描画されること', () => {
 
   render(
     <PopulationGraphLayout
-      onChange={onChangeMock}
+      onPopulationTypeChange={onChangeMock}
       populationData={populationData}
       items={items}
-      onClick={onClickMock}
+      onPopulationButtonClick={onClickMock}
     />
   );
 });
