@@ -17,7 +17,7 @@ export const PopulationGraphLayout = ({
   onClick,
 }: PopulationGraphLayoutProps) => {
   return (
-    <div className="wrapper">
+    <>
       <h1 className="title">都道府県別人口推移</h1>
       <Categories
         onChange={(populationType: PopulationType) => onChange(populationType)}
@@ -27,6 +27,6 @@ export const PopulationGraphLayout = ({
         items={items}
         onClick={(isChecked: boolean, id: string) => onClick(isChecked, id)}
       />
-    </div>
+    </>
   );
 };

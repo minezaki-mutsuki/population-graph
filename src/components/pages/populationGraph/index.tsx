@@ -7,6 +7,7 @@ import { HighchartsDataType } from '../../organisms/graph';
 import { onDeletePrefecture } from './models/onDeletePrefecture';
 import { onCreatePopulationData } from './models/onCreatePopulationData';
 import { Loading } from '../loading';
+import '../populationGraph/style.css';
 
 export type PopulationDataType = {
   all: HighchartsDataType;
@@ -42,30 +43,34 @@ export const PopulationGraph = () => {
     );
   }, [populationDataAll, populationType]);
 
-  return prefecture && populationData ? (
-    <PopulationGraphLayout
-      onChange={(popilationType: PopulationType) => {
-        setPopulationType(popilationType);
-        setPopulationData([]);
-      }}
-      populationData={populationData}
-      items={prefecture}
-      onClick={(isChecked: boolean, id: string) => {
-        isChecked
-          ? onDeletePrefecture(
-              Number(id),
-              populationDataAll,
-              setPopulationDataAll
-            )
-          : onAddPrefecture(
-              Number(id),
-              populationDataAll,
-              setPopulationDataAll,
-              prefecture
-            );
-      }}
-    />
-  ) : (
-    <Loading />
+  return (
+    <div className="wrapper">
+      {prefecture && populationData ? (
+        <PopulationGraphLayout
+          onChange={(popilationType: PopulationType) => {
+            setPopulationType(popilationType);
+            setPopulationData([]);
+          }}
+          populationData={populationData}
+          items={prefecture}
+          onClick={(isChecked: boolean, id: string) => {
+            isChecked
+              ? onDeletePrefecture(
+                  Number(id),
+                  populationDataAll,
+                  setPopulationDataAll
+                )
+              : onAddPrefecture(
+                  Number(id),
+                  populationDataAll,
+                  setPopulationDataAll,
+                  prefecture
+                );
+          }}
+        />
+      ) : (
+        <Loading />
+      )}
+    </div>
   );
 };
