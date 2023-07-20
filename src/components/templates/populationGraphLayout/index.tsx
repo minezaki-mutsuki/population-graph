@@ -7,7 +7,7 @@ type PopulationGraphLayoutProps = {
   onPopulationTypeChange: (popilationType: PopulationType) => void;
   populationData: HighchartsDataType[];
   items: ButtonItem[];
-  onPopulationButtonClick: (isChecked: boolean, id: string) => void;
+  onPopulationButtonClick: (isChecked: boolean, id: number) => void;
 };
 
 export const PopulationGraphLayout = ({
@@ -27,7 +27,7 @@ export const PopulationGraphLayout = ({
       <Graph populationData={populationData} />
       <Buttons
         items={items}
-        onClick={(isChecked: boolean, id: string) =>
+        onClick={(isChecked: boolean, id: number) =>
           onPopulationButtonClick(isChecked, id)
         }
       />

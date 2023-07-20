@@ -1,6 +1,5 @@
 const API_URL = 'https://opendata.resas-portal.go.jp/api/v1/';
 import fetch from 'node-fetch';
-import React from 'react';
 import { ButtonItem } from '../../../molecules/buttons';
 import { PopulationDataAllType, PopulationDataType } from '..';
 
@@ -25,7 +24,7 @@ export const getPrefectures = async () => {
 
     resultItems.forEach((item) => {
       const buttonItem: ButtonItem = {
-        id: item.prefCode.toString(),
+        id: item.prefCode,
         text: item.prefName,
       };
       buttonItems.push(buttonItem);
@@ -71,9 +70,8 @@ export const onAddPrefecture = async (
       oldData.push(item.value);
     });
 
-    const name: string | undefined = prefectures.find(
-      (item) => item.id === id.toString()
-    )?.text;
+    const name: string | undefined = prefectures.find((item) => item.id === id)
+      ?.text;
 
     if (name === undefined) return;
 
@@ -104,8 +102,8 @@ export const onAddPrefecture = async (
       id: id,
       data: populationData,
     });
-    
-    return copy
+
+    return copy;
   } catch (error) {
     console.log(error);
   }

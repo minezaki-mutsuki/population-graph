@@ -79,10 +79,8 @@ export const PopulationGraph = () => {
           }}
           populationData={populationData}
           items={prefectures}
-          onPopulationButtonClick={(isChecked: boolean, id: string) => {
-            isChecked
-              ? fetchDeletePrefecture(Number(id))
-              : fetchAddPrefecture(Number(id));
+          onPopulationButtonClick={(isChecked: boolean, id: number) => {
+            isChecked ? fetchDeletePrefecture(id) : fetchAddPrefecture(id);
           }}
         />
       ) : (

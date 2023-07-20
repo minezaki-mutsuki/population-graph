@@ -3,12 +3,12 @@ import '../buttons/style.css';
 
 export type ButtonItem = {
   text: string;
-  id: string;
+  id: number;
 };
 
 type ButtonsProps = {
   items: ButtonItem[];
-  onClick: (isChecked: boolean, id: string) => void;
+  onClick: (isChecked: boolean, id: number) => void;
 };
 
 export const Buttons = ({ items, onClick }: ButtonsProps) => {
