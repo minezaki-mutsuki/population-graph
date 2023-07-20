@@ -1,14 +1,14 @@
 import { Button } from '../../atoms/button';
 import '../buttons/style.css';
 
-export type ButtonItems = {
+export type ButtonItem = {
   text: string;
-  id: string;
+  id: number;
 };
 
 type ButtonsProps = {
-  items: ButtonItems[];
-  onClick: (isChecked: boolean, id: string) => void;
+  items: ButtonItem[];
+  onClick: (isChecked: boolean, id: number) => void;
 };
 
 export const Buttons = ({ items, onClick }: ButtonsProps) => {

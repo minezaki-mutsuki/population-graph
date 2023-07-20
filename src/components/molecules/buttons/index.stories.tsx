@@ -11,6 +11,6 @@ export const Default: ComponentStoryObj<typeof Buttons> = {
     onClick: (isChecked, id) => {
       console.log(`${isChecked} : ${id}`);
     },
-    items: [...Array(20)].map((_, i) => ({ id: `${i}`, text: `都道府県${i}` })),
+    items: [...Array(20)].map((_, i) => ({ id: i, text: `都道府県${i}` })),
   },
 };

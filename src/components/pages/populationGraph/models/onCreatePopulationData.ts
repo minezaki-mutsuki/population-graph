@@ -4,8 +4,7 @@ import { HighchartsDataType } from '../../../organisms/graph';
 
 export const onCreatePopulationData = (
   populationType: PopulationType,
-  populationDataAll: PopulationDataAllType[],
-  setPopulationData: React.Dispatch<React.SetStateAction<HighchartsDataType[]>>
+  populationDataAll: PopulationDataAllType[]
 ) => {
   const copy = [...populationDataAll];
   const newData: HighchartsDataType[] = [];
@@ -25,5 +24,5 @@ export const onCreatePopulationData = (
     });
   });
 
-  setPopulationData(newData);
+  return newData;
 };

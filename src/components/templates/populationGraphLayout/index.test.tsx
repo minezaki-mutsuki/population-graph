@@ -14,16 +14,16 @@ test('コンポーネントが正しく描画されること', () => {
   ];
 
   const items = [
-    { id: '1', text: 'ボタン1' },
-    { id: '2', text: 'ボタン2' },
+    { id: 1, text: 'ボタン1' },
+    { id: 2, text: 'ボタン2' },
   ];
 
   render(
     <PopulationGraphLayout
-      onChange={onChangeMock}
+      onPopulationTypeChange={onChangeMock}
       populationData={populationData}
       items={items}
-      onClick={onClickMock}
+      onPopulationButtonClick={onClickMock}
     />
   );
 });

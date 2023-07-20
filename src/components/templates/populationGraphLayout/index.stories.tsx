@@ -8,7 +8,8 @@ export default {
 
 export const Default: ComponentStoryObj<typeof PopulationGraphLayout> = {
   args: {
-    onChange: (populationType) => console.log(`selected : ${populationType}`),
+    onPopulationTypeChange: (populationType) =>
+      console.log(`selected : ${populationType}`),
     populationData: [
       {
         type: 'line',
@@ -21,9 +22,9 @@ export const Default: ComponentStoryObj<typeof PopulationGraphLayout> = {
         name: '青森県',
       },
     ],
-    onClick: (isChecked, id) => {
+    onPopulationButtonClick: (isChecked, id) => {
       console.log(`${isChecked} : ${id}`);
     },
-    items: [...Array(20)].map((_, i) => ({ id: `${i}`, text: `都道府県${i}` })),
+    items: [...Array(20)].map((_, i) => ({ id: i, text: `都道府県${i}` })),
   },
 };
