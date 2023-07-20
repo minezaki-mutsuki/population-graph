@@ -7,6 +7,13 @@ vercel : https://population-graph-phi.vercel.app/
 UIテスト : storybook<br>
 リンター : ESLint<br>
 フォーマッター : Prettier<br>
+
+## セットアップ手順
+1. プロジェクト立ち上げ（create-react-app）
+2. ESLint設定
+3. storybook設定（npx storybook init）
+4. chromaticによるstorybookのCI/CD設定
+
 ## 工夫、努力した点
 - atomic designによるコンポーネントの分割
     
