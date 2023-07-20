@@ -3,7 +3,7 @@ vercel : https://population-graph-phi.vercel.app/
 ## 使用技術
 言語 : TypeScript<br>
 フレームワーク : React<br>
-スタイリング : CSS
+スタイリング : CSS<br>
 テスト : jest<br>
 UIテスト : storybook<br>
 リンター : ESLint<br>
