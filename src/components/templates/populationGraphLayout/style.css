@@ -2,3 +2,8 @@
   color: #e860ce;
   margin: 0;
 }
+.populationgraph-wrapper {
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+}
