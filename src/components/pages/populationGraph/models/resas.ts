@@ -11,9 +11,7 @@ type ResultItem = {
   prefName: string;
 };
 
-export const getPrefectures = async (
-  setPrefectures: React.Dispatch<React.SetStateAction<ButtonItem[] | undefined>>
-) => {
+export const getPrefectures = async () => {
   try {
     const res = await fetch(`${API_URL}prefectures`, {
       method: 'GET',
@@ -32,7 +30,7 @@ export const getPrefectures = async (
       };
       buttonItems.push(buttonItem);
     });
-    setPrefectures(buttonItems);
+    return buttonItems;
   } catch (error) {
     console.log(error);
   }
@@ -41,9 +39,6 @@ export const getPrefectures = async (
 export const onAddPrefecture = async (
   id: number,
   populationDataAll: PopulationDataAllType[],
-  setPopulationDataAll: React.Dispatch<
-    React.SetStateAction<PopulationDataAllType[]>
-  >,
   prefectures: ButtonItem[]
 ) => {
   try {
@@ -109,7 +104,8 @@ export const onAddPrefecture = async (
       id: id,
       data: populationData,
     });
-    setPopulationDataAll(copy);
+    
+    return copy
   } catch (error) {
     console.log(error);
   }

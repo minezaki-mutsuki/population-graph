@@ -15,13 +15,14 @@ export type PopulationDataType = {
   adult: HighchartsDataType;
   old: HighchartsDataType;
 };
+
 export type PopulationDataAllType = {
   id: number;
   data: PopulationDataType;
 };
 
 export const PopulationGraph = () => {
-  const [populationType, setPopulationType] = useState<PopulationType>();
+  const [populationType, setPopulationType] = useState<PopulationType>('all');
   const [prefectures, setPrefectures] = useState<ButtonItem[]>();
   const [populationDataAll, setPopulationDataAll] = useState<
     PopulationDataAllType[]
@@ -29,19 +30,44 @@ export const PopulationGraph = () => {
   const [populationData, setPopulationData] = useState<HighchartsDataType[]>(
     []
   );
+
   useEffect(() => {
-    setPopulationType('all');
-    getPrefectures(setPrefectures);
+    const fetchPrefectures = async () => {
+      const prefecturesData = await getPrefectures();
+      setPrefectures(prefecturesData);
+    };
+    fetchPrefectures();
   }, []);
 
   useEffect(() => {
-    if (populationType === undefined) return;
-    onCreatePopulationData(
-      populationType,
-      populationDataAll,
-      setPopulationData
-    );
+    const fetchPopulationData = async () => {
+      const newPopulationData = await onCreatePopulationData(
+        populationType,
+        populationDataAll
+      );
+      setPopulationData(newPopulationData);
+    };
+    fetchPopulationData();
   }, [populationDataAll, populationType]);
+
+  const fetchAddPrefecture = async (id: number) => {
+    if (!prefectures) return;
+    const newPopulationDataAll = await onAddPrefecture(
+      id,
+      populationDataAll,
+      prefectures
+    );
+    if (!newPopulationDataAll) return;
+    setPopulationDataAll(newPopulationDataAll);
+  };
+
+  const fetchDeletePrefecture = async (id: number) => {
+    const newPopulationDataAll = await onDeletePrefecture(
+      id,
+      populationDataAll
+    );
+    setPopulationDataAll(newPopulationDataAll);
+  };
 
   return (
     <div className="wrapper">
@@ -55,17 +81,8 @@ export const PopulationGraph = () => {
           items={prefectures}
           onPopulationButtonClick={(isChecked: boolean, id: string) => {
             isChecked
-              ? onDeletePrefecture(
-                  Number(id),
-                  populationDataAll,
-                  setPopulationDataAll
-                )
-              : onAddPrefecture(
-                  Number(id),
-                  populationDataAll,
-                  setPopulationDataAll,
-                  prefectures
-                );
+              ? fetchDeletePrefecture(Number(id))
+              : fetchAddPrefecture(Number(id));
           }}
         />
       ) : (
